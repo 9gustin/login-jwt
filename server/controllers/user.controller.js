@@ -20,7 +20,7 @@ UserController.postUser = async (req, res) => {
         params.password != undefined && params.confirm_password != undefined) {
 
         //si se pasaron los datos necesarios se procede a verificar campo por campo que sean correctos
-        const { errors, isValid } = userValidator.register(params);
+        let { errors, isValid } = userValidator.register(params);
 
         if (isValid) //si los datos ya estan validados 
         {
@@ -64,7 +64,7 @@ UserController.postUser = async (req, res) => {
                             }
                             else {
                                 if (!userSaved) { res.status(500).json({ message: "El usuario no fue guardado" }); }
-                                else { res.status(200).json(userSaved); }
+                                else { res.status(201).json({ message: "Usuario guardado correctamente" }); }
                             }
                         });//end user.save
 
@@ -81,14 +81,54 @@ UserController.postUser = async (req, res) => {
     }
 }
 
-UserController.getUsers = async (req,res)=>{
-    try{
+UserController.getUsers = async (req, res) => {
+    try {
         let users = await User.find();
 
         res.status(200).json(users);
     }
-    catch(err){
-        res.status(500).json({message:"Error inesperado"});
+    catch (err) {
+        res.status(500).json({ message: "Error inesperado" });
+    }
+}
+
+UserController.LoginUser = async (req, res) => {
+    let params = req.body;
+    //valida si se pasan los campos necesarios 
+    if (params.username != undefined && params.password != undefined) {
+
+        let { errors, isValid } = userValidator.login(params);
+
+        if (isValid) {//validacion de los datos ingresados
+
+            //buscar un usuario con ese nombre de usuario
+            let user = await User.findOne({ username: params.username });
+
+            if (!user)//si no se encontro el usuario 
+            { res.status(200).json({ message: "No se encontro un usuario con ese nombre de usuario" }); }
+            else {//si se encontro el usuario hay que comparar las contraseñas 
+                bcrypt.compare(params.password, user.password, (err, ok) => {
+                    if (err) {
+                        res.status(500).json({ message: "Ocurrio un error inesperado" });
+                    }
+                    else if (ok) {
+                        user.password = undefined;
+                        res.status(200).json(user);
+                    }
+                    else {
+                        res.status(200).json({ message: "Contraseña incorrecta" });
+                    }
+                })
+            }
+        }//end if isValid
+        else {
+
+            res.status(200).json(errors);
+        }
+
+    }//end if undefined
+    else {
+        res.status(400).json({ message: "No se pasaron los datos correctos para realizar el login" })
     }
 }
 module.exports = UserController;

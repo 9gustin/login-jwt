@@ -49,4 +49,34 @@ UserValidator.register = (userData)=>{
 
 }
 
+UserValidator.login = (userData)=>{
+    //completa si estan vacios
+
+    userData.username = !validator.isEmpty(userData.username) ? userData.username : '';
+    userData.password = !validator.isEmpty(userData.password) ? userData.password : '';
+
+    let errors = {};
+    //username
+    if(validator.isEmpty(userData.username)){
+
+        errors.username = "Ingresa un nombre de usuario";
+    }
+    else if(!validator.isLength(userData.username, {min:6, max : 20})){
+        errors.username = "El nombre de usuario debe contener entre 6 y 20 caracteres";
+    }
+    //password
+    if(validator.isEmpty(userData.password)){
+        errors.password = "Ingrese una contraseña";
+    }else if(!validator.isLength(userData.password, {min:6, max:20})){
+        errors.password="La contraseña debe tener entre 6 y 20 caracteres";
+    }
+
+    //verifica si es valido
+    let valid = (errors.username || errors.password) ? false : true;
+    return {
+        errors,
+        isValid : valid
+    }
+}
+
 module.exports = UserValidator;
