@@ -11,34 +11,34 @@ UserValidator.register = (userData)=>{
     userData.confirm_password = !validator.isEmpty(userData.confirm_password) ? userData.confirm_password : '';
 
     let errors = {};
-
+    //validar nombre de usuario
     if(validator.isEmpty(userData.username)){
-        errors.username = "The username cannot be empty";
+        errors.username = "El nombre de usuario no puede estar vacio";
     }
     else if(!validator.isLength(userData.username, {min:6, max:20})){
-        errors.username = "The username must contain between 6 and 20 characters."
+        errors.username = "El nombre de usuario debe contener entre 6 y 20 caracteres"
     }
-
+    //validar contraseña
     if(validator.isEmpty(userData.password)){
-        errors.password = "The password cannot be empty";
+        errors.password = "La contraseña no puede estar vacia";
     }
     else if(!validator.isLength(userData.password, {min:6, max:20})){
-        errors.password = "The password must contain between 6 and 20 characters."
+        errors.password = "La contraseña debe contener entre 6 y 20 caracteres"
     }
-
+    //validar email
     if(validator.isEmpty(userData.email)){
-        errors.email = "The email cannot be empty";
+        errors.email = "El mail no puede estar vacio";
     }
     else if(!validator.isEmail(userData.email)){
-        errors.email="The email entered is not a valid email. Please enter an email";
+        errors.email="Ingrese un mail valido";
     }
-    
+    //validar confirmacion de contraseña
     if(validator.isEmpty(userData.confirm_password)){
-        errors.confirm_password = "The confirm password cannot be empty";
+        errors.confirm_password = "Confirme su contraseña";
     } else if(!validator.equals(userData.password, userData.confirm_password)){
-        errors.confirm_password = "The passwords not be equals";
+        errors.confirm_password = "Las contraseñas ingresadas no coinciden";
     }
-
+    //verifica si los datos son validos, fijandose si no existen errores 
     let valid = (errors.username || errors.password || errors.email || errors.confirm_password ) ? false : true;
 
     return {

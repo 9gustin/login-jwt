@@ -4,13 +4,13 @@ var db_url = 'mongodb://localhost/login';
 
 mongoose.connect(db_url, { useNewUrlParser: true }, (err, connected)=>{
     if(err){
-        console.log('An error occurred when try to connect to database. ', err);
+        console.log('Ocurrio un error intentando conectarse a la base de datos. Codigo de error: ', err);
     }
     if(connected){
-        console.log('Database is connected');
+        console.log('Conexion con la base de datos exitosa');
     }
     else{
-        console.log('Database is not connected')
+        console.log('No se establecio una conexion con la base de datos')
     }
 });
 

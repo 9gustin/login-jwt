@@ -19,6 +19,6 @@ app.use('/api/user', require('./routes/user.routes'));
 
 //Start app 
 app.listen(app.get('port'), ()=>{
-    console.log('Server is running in port ', app.get('port'));
+    console.log('Servidor corriendo en el puerto',app.get('port'));
 })
 

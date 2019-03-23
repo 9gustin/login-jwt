@@ -81,4 +81,14 @@ UserController.postUser = async (req, res) => {
     }
 }
 
+UserController.getUsers = async (req,res)=>{
+    try{
+        let users = await User.find();
+
+        res.status(200).json(users);
+    }
+    catch(err){
+        res.status(500).json({message:"Error inesperado"});
+    }
+}
 module.exports = UserController;
