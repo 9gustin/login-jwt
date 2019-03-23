@@ -25,12 +25,15 @@ UserController.postUser = async (req, res) => {
         if (isValid) //si los datos ya estan validados 
         {
             //verificar que no exista ya un usuario con ese email o username
-            let users = await User.find({ email: params.email });
             let ocupado = false;
+
+            //verificar email
+            let users = await User.find({ email: params.email });
+
             if (users.length > 0) {
                 ocupado = true;
                 res.status(200).json({ message: "El email ingresado ya esta en uso" });
-            } else {
+            } else { // si el email esta disponible, verifica username
                 users = await User.find({ username: params.username });
 
                 if (users.length > 0) {
@@ -38,7 +41,7 @@ UserController.postUser = async (req, res) => {
                     res.status(200).json({ message: "El username ingresado ya esta en uso" });
                 }
             }
-            if (!ocupado) {
+            if (!ocupado) {//si el username y el mail estan disponibles
                 //encriptar contraseña
                 bcrypt.hash(params.password, null, null, (err, hash) => {
                     if (err) {
