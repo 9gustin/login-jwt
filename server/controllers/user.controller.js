@@ -4,7 +4,7 @@ var User = require('../models/user');
 
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
-var validator = require('validator');
+var jwt = require('../services/jwt');
 
 var userValidator = require('../validacion/user.validator');
 
@@ -20,7 +20,7 @@ UserController.postUser = async (req, res) => {
         params.password != undefined && params.confirm_password != undefined) {
 
         //si se pasaron los datos necesarios se procede a verificar campo por campo que sean correctos
-        let { errors, isValid } = userValidator.register(params);
+        let { errors, isValid } = userValidator.register(req.body);
 
         if (isValid) //si los datos ya estan validados 
         {
@@ -111,9 +111,13 @@ UserController.LoginUser = async (req, res) => {
                     if (err) {
                         res.status(500).json({ message: "Ocurrio un error inesperado" });
                     }
-                    else if (ok) {
+                    else if (ok) {//si paso los controles, genera token y lo devuelve
+
                         user.password = undefined;
-                        res.status(200).json(user);
+
+                        let token = jwt.createToken(user);
+
+                        res.status(200).json(token);
                     }
                     else {
                         res.status(200).json({ message: "Contraseña incorrecta" });
