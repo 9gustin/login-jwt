@@ -1,0 +1,173 @@
+
+/*HEADER */
+.header{
+    width:100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #000d1a;
+}
+.header .title{
+    color: rgba(106,196,140,1);
+    font-weight: bold;
+    font-size: 30px;
+}
+/*ALL - FORMSCONTROLS*/
+
+.row{
+    width:100%;
+}
+
+input{
+    font-size: 19px;
+    font-weight: bold;
+    transition: all .8s;
+}
+.inp-log:focus{
+    font-size: 17px;
+}
+.inp-log::placeholder{
+    color:black;
+    opacity: 0.7;
+}
+.log-row{
+    padding: 5px;
+    border:1px solid black;
+    background-color: rgba(255,255,255,0);
+    text-align: center;  
+    margin:10px 10% ;
+    width: 80%;
+    border-radius: 10px;
+}
+input:focus{
+    outline: none;
+}
+.button{
+    cursor: pointer;
+}
+.button:focus{
+    outline: none;
+}
+.btn-log{
+    padding:7px;
+    width: 100%;
+    min-height:40px;
+    background-color: rgba(106,196,140,1);
+    font-size: 18px;
+    font-weight: bold;
+    border:none;
+    transition: all .8s;
+}
+.btn-log:hover{
+    font-size: 22px;
+    padding:3px;
+}
+.forget{
+    padding:10px;
+    text-align: center;
+    display: block;
+    font-weight: bold;
+    background-color: #000d1a;
+    opacity: 0.7;
+    transition: all .8s;
+    color:#6AC48C;
+}
+.forget:hover{
+    opacity: .9;
+}
+/*LOGIN*/
+.login{
+    border-radius: 10px;
+    background-color: rgba(106,196,140,0.5);
+    width:30%;    
+    height: auto;
+    float:right;
+    margin-right:8%;
+    margin-top:5%;
+}
+.form-title{
+    background-color: #6AC48C;
+    text-align: center;
+    padding:10px;
+}
+
+
+
+
+/*REGISTER*/
+.register{
+    border-radius: 10px;
+    background-color: rgba(106,196,140,0.5);
+    width:37%;    
+    height: auto;
+    float:left;
+    margin-left:8%;
+}
+
+/*CONTROLS REGISTER*/
+.form-register label {
+    font-weight: bold;
+    font-size: 20px;
+}
+.form-register{
+    margin:10px 10%;
+    width:80%;
+    text-align: center;
+}
+.btn-register{
+    padding:15px 7px;
+    width: 90%;
+    min-height:40px;
+    background-color: #000d1a;
+    font-size: 20px;
+    font-weight: bold;
+    border:none;
+    transition: all .8s;
+    border-radius: 5px;
+    color:#6AC48C;
+    opacity: 0.7;
+    margin-top: 20px; 
+}
+.btn-register:hover{
+    border-radius: 7px;
+    opacity: 1;
+}
+
+.form-register .row{
+    margin: 10px;
+}
+.inp-register{
+    background-color: rgba(0,0,0,0);
+    border-radius: 5px;
+    border:none;
+    border:1px solid black;
+    padding: 10px;
+    width: 65%;
+    text-align: center;
+}
+
+/*FOOTER*/
+.footer {
+    position: absolute;
+    bottom: 0;
+    width:100%;
+    text-align:center;
+    background-color: rgba(255,255,255,0.1);
+
+}   
+.footer a{
+    color: #6AC48C;
+    padding: 5px;
+    opacity: 0.8;
+}
+
+
+/* COLORS
+
+background-color: #6AC48C; Green 
+background-color: #9F1818; Red 
+background-color: #000d1a;  Dark 
+rgba(106,196,140,0.5) GREEN OPACITY
+*/
