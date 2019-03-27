@@ -32,13 +32,13 @@ UserController.postUser = async (req, res) => {
 
             if (users.length > 0) {
                 ocupado = true;
-                res.status(200).json({ message: "El email ingresado ya esta en uso" });
+                res.status(200).json({ errors:{email:"El email ingresado ya esta en uso" }  });
             } else { // si el email esta disponible, verifica username
                 users = await User.find({ username: params.username });
 
                 if (users.length > 0) {
                     ocupado = true;
-                    res.status(200).json({ message: "El username ingresado ya esta en uso" });
+                    res.status(200).json({ errors:{username: "El username ingresado ya esta en uso"}  });
                 }
             }
             if (!ocupado) {//si el username y el mail estan disponibles
@@ -74,7 +74,7 @@ UserController.postUser = async (req, res) => {
             }//end if(!ocupado)
 
         }
-        else { res.status(200).json(errors); } //si la validacion dio false se devuelven los errores en los datos ingresados
+        else { res.status(200).json({errors}); } //si la validacion dio false se devuelven los errores en los datos ingresados
     }
     else {
         res.status(400).json({ message: "The user data is not complete" });//datos undefinded
@@ -105,7 +105,7 @@ UserController.LoginUser = async (req, res) => {
             let user = await User.findOne({ username: params.username });
 
             if (!user)//si no se encontro el usuario 
-            { res.status(200).json({ message: "No se encontro un usuario con ese nombre de usuario" }); }
+            { res.status(200).json({ errors:{username:"No se encontro un usuario con ese nombre de usuario"}  }); }
             else {//si se encontro el usuario hay que comparar las contraseñas 
                 bcrypt.compare(params.password, user.password, (err, ok) => {
                     if (err) {
@@ -117,17 +117,17 @@ UserController.LoginUser = async (req, res) => {
 
                         let token = jwt.createToken(user);
 
-                        res.status(200).json(token);
+                        res.status(200).json({token:token});
                     }
                     else {
-                        res.status(200).json({ message: "Contraseña incorrecta" });
+                        res.status(200).json({ errors:{password: "Contraseña incorrecta"}  });
                     }
                 })
             }
         }//end if isValid
         else {
 
-            res.status(200).json(errors);
+            res.status(200).json({errors});
         }
 
     }//end if undefined

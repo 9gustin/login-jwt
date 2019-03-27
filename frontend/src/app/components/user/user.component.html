@@ -12,10 +12,20 @@
                       name="username" ngModel>
               </div>
               <div class="row">
+                <label for="">
+                    {{errorsLogin.username}}
+                </label>
+            </div>
+              <div class="row">
                   <input type="password" class="inp-log log-row"  
                     autocomplete="OFF" placeholder="Contraseña.."
                       name="password" ngModel>
               </div>
+              <div class="row">
+                <label for="">
+                    {{errorsLogin.password}}
+                </label>
+            </div>
               <div class="row">
                   <input type="submit" class="button btn-log" 
                     value="Entrar" >
@@ -40,13 +50,23 @@
                         name="username" ngModel>
               </div>
               <div class="row">
-                  <label for="">Contraseña:</label>
                   
+                <span for="">
+                    {{errorsRegister.username}}
+                </span>
+            </div>
+              <div class="row">
+                  <label for="">Contraseña:</label>
               </div>
               <div class="row">
                       <input type="password" class="inp-register" 
                       name="password" ngModel>
               </div>
+              <div class="row">
+                <span for="">
+                    {{errorsRegister.password}}
+                </span>
+            </div>
               <div class="row">
                 <label for="">Confirmar Contraseña:</label>
                 
@@ -54,6 +74,11 @@
             <div class="row">
                     <input type="password" class="inp-register" 
                     name="confirm_password" ngModel>
+            </div>
+            <div class="row">
+                <span for="">
+                    {{errorsRegister.confirm_password}}
+                </span>
             </div>
               <div class="row">
                   <label for="">Correo Electronico:</label>
@@ -63,6 +88,11 @@
                       <input type="text" class="inp-register" 
                         name="email" ngModel>
               </div>
+              <div class="row">
+                <span for="">
+                    {{errorsRegister.email}}
+                </span>
+            </div>
               <div class="row">
                   <input type="submit" value="Registrate" 
                     class="button btn-register">
